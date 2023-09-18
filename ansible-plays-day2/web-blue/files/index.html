@@ -1,0 +1,46 @@
+<!--
+Created Date: 12.09.2023 07:12
+Author: Fabrice Krebs
+-----
+Last Modified: 18.09.2023 10:53
+Modified By: Fabrice Krebs
+-->
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My web page</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: blue;
+        }
+
+        .logo {
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo">
+        <img src="https://cdn.icon-icons.com/icons2/3913/PNG/512/nutanix_logo_icon_248341.png" alt="Nutanix Logo" width="200">
+    </div>
+    
+    <h1 id="content"></h1>
+
+    <script>
+        //Retrieve server header
+
+        var req = new XMLHttpRequest();
+        req.open('GET', document.location, false);
+        req.send(null);
+        var headers = req.getResponseHeader('server');
+
+        var serverHeader = document.getElementById("content");
+        serverHeader.innerText = "Serveur Version : " + headers;
+    </script>
+</body>
+</html>

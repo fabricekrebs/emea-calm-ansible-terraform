@@ -1,0 +1,17 @@
+###################################################################
+# Created Date: 07.09.2023 11:11
+# Author: Fabrice Krebs
+# -----
+# Last Modified: 18.09.2023 11:24
+# Modified By: Fabrice Krebs
+###################################################################
+
+---
+- hosts: all
+  become: yes
+  tasks:
+  
+    - name: Copy custom index.html
+      copy:
+        src: files/index.html
+        dest: /var/www/html/index.html

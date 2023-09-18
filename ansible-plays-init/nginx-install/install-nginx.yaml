@@ -1,0 +1,40 @@
+###################################################################
+# Created Date: 07.09.2023 11:11
+# Author: Fabrice Krebs
+# -----
+# Last Modified: 18.09.2023 10:30
+# Modified By: Fabrice Krebs
+###################################################################
+
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: install nginx
+      apt: name=nginx state=latest
+
+    - name: start nginx
+      service:
+          name: nginx
+          state: started
+
+    - name: copy the nginx config file and restart nginx
+      copy:
+        src: files/static_site.cfg
+        dest: /etc/nginx/sites-available/static_site.cfg
+
+    - name: create symlink
+      file:
+        src: /etc/nginx/sites-available/static_site.cfg
+        dest: /etc/nginx/sites-enabled/default
+        state: link
+
+    - name: copy custom index.html
+      copy:
+        src: files/index.html
+        dest: /var/www/html/index.html
+      
+    - name: restart nginx
+      service:
+        name: nginx
+        state: restarted
